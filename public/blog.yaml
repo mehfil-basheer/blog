@@ -1,0 +1,275 @@
+openapi: 3.0.0
+info:
+  title: BLOG
+  description: >-
+    This collection contains the endpoint for the blog application , endpoints
+    are divided into folders as below
+
+
+    - Authentication - contains endpoints for registratioin and login
+        
+    - Posts - contains endpoints related with posts
+        
+    - Comment - contains endpoints related with comments ( like, reply a
+    comment)
+  version: 1.0.0
+servers:
+  - url: http://{{base_url}}
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+tags:
+  - name: Authenticatiion
+  - name: Posts
+    description: >-
+      its include basic cruds over posts and endpoints for like and comment a
+      post
+  - name: Comments
+    description: |-
+      This folder includes 4 apis as below
+
+      - show comments - Its for get list of all comments
+          
+      - show comment details - for get information of each comment specified
+          
+      - like comment - for like comment
+          
+      - reply comment - for replying a comment
+paths:
+  /register:
+    post:
+      tags:
+        - Authenticatiion
+      summary: register
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                name: newuser
+                email: newuser@gmail.com
+                password: '123456789'
+                username: newuser
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /login:
+    post:
+      tags:
+        - Authenticatiion
+      summary: LOGIN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: newuser@gmail.com
+                password: '123456789'
+      parameters:
+        - name: Accept
+          in: header
+          schema:
+            type: string
+          example: application/json
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /posts:
+    post:
+      tags:
+        - Posts
+      summary: create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: secondaaa post
+                description: discription
+                image: ''
+                createdBy: 2
+                tags:
+                  - 2
+                  - 1
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Posts
+      summary: Get all posts
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /posts/1:
+    put:
+      tags:
+        - Posts
+      summary: Edit
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                title: last post
+                description: discription
+                image: ''
+                createdBy: 2
+                tags:
+                  - 2
+                  - 1
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    delete:
+      tags:
+        - Posts
+      summary: delete post
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - Posts
+      summary: get post details
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /posts/4/like:
+    post:
+      tags:
+        - Posts
+      summary: Like a post
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /posts/4/comment:
+    post:
+      tags:
+        - Posts
+      summary: comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                comment: new comment2
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /posts/4/showLikes:
+    get:
+      tags:
+        - Posts
+      summary: show likes
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /posts/4/showComments:
+    get:
+      tags:
+        - Comments
+      summary: show comments
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /comments/1:
+    get:
+      tags:
+        - Comments
+      summary: show Comment Details
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /comment/1/likeComment:
+    post:
+      tags:
+        - Comments
+      summary: like comment
+      requestBody:
+        content: {}
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /comment/1/replyComment:
+    post:
+      tags:
+        - Comments
+      summary: reply comment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                reply: nycc
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
